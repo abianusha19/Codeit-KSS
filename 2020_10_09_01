@@ -1,0 +1,55 @@
+Implement Undo and Redo features of a Text Editor
+Given an array of strings Q[], consisting of queries of the following types:
+•	“WRITE X”: Write a character X into the document.
+•	“UNDO”: Erases the last change made to the document.
+•	“REDO”: Restores the most recent UNDO operation performed on the document.
+•	“READ”: Reads and prints the contents of the documents.
+
+Example
+Input: Q = {“WRITE A”, “WRITE B”, “WRITE C”, “UNDO”, “READ”, “REDO”, “READ”}
+Output: AB ABC
+Explanation:
+Perform “WRITE A” on the document. Therefore, the document contains only “A”.
+Perform “WRITE B” on the document. Therefore, the document contains “AB”.
+Perform “WRITE C” on the document. Therefore, the document contains “ABC”.
+Perform “UNDO” on the document. Therefore, the document contains “AB”.
+Print the contents of the document, i.e. “AB”
+Perform “REDO” on the document. Therefore, the document contains “ABC”.
+Print the contents of the document, i.e. “ABC”
+Input: Q = {“WRITE x”, “WRITE y”, “UNDO”, “WRITE z”, “READ”, “REDO”, “READ”}
+Output:xz xzy
+
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Solution:
+
+q = []
+query = []
+undo_query = []
+output_string = ""
+#input from user
+while True:
+    q.append(input())
+    if q[-1] == "":
+        q.pop()
+        break
+ 
+for i in q:
+    if i[0]== "W":
+        output_string += i[-1]
+        query.append(i[-1])
+
+    elif i[0] == "U":
+        j = query.pop()
+        output_string = output_string.replace(output_string[-1], '')
+        undo_query.append(j)
+
+    elif i[0] == "R" and i[-1]== "D":
+        print(output_string, end=" ")
+    elif i[0] == "R" and i[-1]=="O":
+        q1 = undo_query.pop()
+        output_string += q1
+
+
+
