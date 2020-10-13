@@ -1,0 +1,28 @@
+Given a string s, find the length of the longest substring without repeating characters.
+Example 1:
+Input: s = "abcabcbb"
+Output: 3
+Explanation: The answer is "abc", with the length of 3.
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Solution:
+def findMaxLength(s):
+        setString=set()
+        n=len(s)
+        start=end=0
+        maxlen=0
+        while end<n:
+            if s[end] in setString:
+                setString.remove(s[start])
+                start+=1
+            else:
+                setString.add(s[end])
+                end+=1
+            if maxlen<len(setString):
+                maxlen=len(setString)
+        
+        return maxlen
+
+s=input()
+print(findMaxLength(s))
