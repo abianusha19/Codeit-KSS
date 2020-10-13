@@ -1,0 +1,48 @@
+Count pairs in array whose sum is divisible by 4
+Given a array if ‘n’ positive integers. Count number of pairs of integers in the array that have the sum divisible by 4.
+
+Example 1
+Input: {2, 2, 1, 7, 5}
+Output: 3
+Explanation
+Only three pairs are possible whose sum is divisible by '4' i.e., (2, 2), (1, 7) and (7, 5)
+Example 2
+Input: {2, 2, 3, 5, 6}
+Output: 4
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Solution:
+
+def findpair(arr):
+  n=len(arr)
+  freq=[0]*(n-1)
+  for x in arr:
+    freq[x%4]+=1
+  totalPairs=0
+  totalPairs+=(freq[0]*(freq[0]-1))//2
+  totalPairs+=(freq[1]*freq[3])
+  totalPairs+=(freq[2]*(freq[2]-1))//2
+  return totalPairs
+arr=[2, 2, 1, 7, 5]
+print(findpair(arr))
+
+Generalised Solution:
+
+
+def findpair(arr,k):
+  freq=[0]*(k)
+  for x in arr:
+    freq[x%k]+=1
+  totalPairs=0
+  totalPairs+=(freq[0]*(freq[0]-1))//2
+  i=1
+  while(i<=k//2 and i!=k-i):
+    totalPairs+=(freq[i]*freq[k-i])
+    i+=1
+  if k%2==0:
+    totalPairs+=(freq[k//2]*(freq[k//2]-1))//2
+  return totalPairs
+arr=[5, 9, 36, 74, 52, 31, 42]
+k=int(input())
+print(findpair(arr,k))
