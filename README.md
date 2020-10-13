@@ -1,2 +1,2 @@
 # Codeit-KSS
-Knowledge sharing session problems
+Knowledge sharing session problems with code
