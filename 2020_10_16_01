@@ -1,0 +1,69 @@
+Farming Figures
+Problem Description
+You are given N sticks of varying lengths. You need to determine whether it is possible to form a polygon of positive area by arranging them in some order. For example, if three sticks of lengths 1, 1, 1 are given we can easily see that we can form a triangle by arranging them in order. On the other hand, if the sticks have lengths 1, 2, 1, then we cannot form a polygon of non-zero area with these.
+Constraints
+1 <= N <= 100
+Length of any stick will be less than 100
+
+Input Format
+The first line contains an integer N indicating number of sticks
+The next line contains N space separated positive integers giving the lengths of the sticks
+Output
+One line containing the number of sides of the polygon of most sides (of at least 3 sides) that can be formed with some of the sticks. If no polygon can be formed, the output should be 0.
+Explanation
+Example 1
+Input
+3
+1 1 1
+Output
+3
+Explanation
+
+N=3, and there are 3 sticks, each of length 1. With three sticks of length 1, we can form a triangle
+
+-----------------------------------------------------------------------------------------------------------------------------------------------
+
+Solution:
+
+import java.util.*;
+public class polygon
+{
+
+static int checkPolygon(int sum,int array[])
+{
+PriorityQueue<Integer> pq=new PriorityQueue<Integer>(Collections.reverseOrder());
+for(int i=0;i<array.length;i++)
+{
+pq.add(array[i]);
+}
+while(pq.size()>=3)
+{
+if(sum-pq.peek()>pq.peek())
+{
+	
+return pq.size();
+}
+else
+{
+sum-=pq.peek();
+pq.poll();
+}
+}
+return 0;
+}
+
+public static void main(String args[])
+{
+Scanner sc=new Scanner(System.in);
+int n=sc.nextInt();
+int arr[]=new int[n];
+int sum=0;
+for(int i=0;i<n;i++)
+{
+arr[i]=sc.nextInt();
+sum+=arr[i];
+}
+System.out.print(checkPolygon(sum,arr));
+}
+}
+
