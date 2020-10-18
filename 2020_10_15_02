@@ -1,0 +1,66 @@
+Write a program to accept two natural numbers n1 and n2, perform the above calculations and output the "converged" number.
+output "Out of bounds" if any number exceeds 99,999 during calculations.
+(Note: If the input numbers are the same, we would take the output to be that number itself.)
+Constraints
+N,M<=90000
+Input Format
+First Line contains two integers delimited by space <N M>
+Output
+Single line containing Converge number
+"Out of bounds" if any number exceeds 99,999 during calculations.
+
+Explanation
+ Example 1:
+ Input: 5 6
+ Output: 352
+Example 2:
+ Input: 1 1
+ Output: 1
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Solution:
+
+def funcResult(n,suffix):
+  ones=['','One','Two','Three','Four','Five','Six','Seven','Eight','Nine','Ten','Eleven','Twelve','Thirteen','Fourteen','Fifteen','Sixteen','Seventeen','Eighteen','Nineteen']
+  tens=['','','Twenty','Thirty','Forty','Fifty','Sixty','Seventy','Eighty','Ninety']
+  result=""
+  if n>19:
+    result += tens[n//10] + ones[n%10]
+  else:
+    result+= ones[n]
+  
+  if n:
+    result+=suffix
+  return result
+
+
+def getwords(n):
+  finalword=""
+  finalword+=funcResult(n//1000,'Thousand')
+  finalword+=funcResult((n//100)%10,'Hundred')
+  finalword+=funcResult(n%100,"")
+  return finalword
+
+
+n1,n2=map(int,input().split())
+if n1==n2:
+  print(n1)
+else:
+  flag=0
+  while True:
+    word1=getwords(n1)
+    word2=getwords(n2)
+    if word1<word2:
+      n1+=n1
+      n2+=n2
+      if n1>99999 or n2>99999:
+        print("Out of Bounds")
+        flag=1
+        break
+
+    else:
+      break
+  if flag==0:
+    print(n1+n2)
