@@ -1,0 +1,31 @@
+Given a number N, the task is to reduce it to a single-digit number by repeatedly subtracting the adjacent digits. That is, in the first iteration, subtract all of the adjacent digits to generate a new number, if this number contains more than one digit, repeat the same process until it becomes a single-digit number.
+Input: N = 6972
+Output: 2
+| 6 – 9 | = 3
+| 9 – 7 | = 2
+| 7 – 2 | = 5
+After first step we get 325 but 325 is not a single-digit number so we’ll further reduce it until we do not get single digit number.
+| 3 – 2 | = 1
+| 2 – 5 | = 3
+And now the number will become 13, we’ll reduce it furthur
+| 1 – 3 | = 2
+Input: N = 123456
+Output: 0
+
+-----------------------------------------------------------------------------------------------------------------
+Solution:
+
+n=input()
+orgnum=n
+while(int(orgnum)>=10):
+    
+    arr=list(str(orgnum))
+    orgnum=0
+    for x in range(len(arr)):
+        arr[x]=int(arr[x])
+    for x in range(len(arr)-1):
+        diff=abs(arr[x]-arr[x+1])
+        orgnum=orgnum*10 + diff
+print(orgnum)
+    
+    
