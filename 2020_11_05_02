@@ -1,0 +1,22 @@
+Determine if the sum of two integers is equal to the given value
+Given an array of integers and a value, determine if there are any two integers in the array whose sum is equal to the given value. Return true if the sum exists and return false if it does not. Consider this array and the target sums:
+ 5 7 1 2 8 4 3
+ 10
+ True
+ 19 
+ False
+
+---------------------------------------------------------------------------------------------------------------------
+Solution:
+
+arr=list(map(int,input().split()))
+target=int(input())
+flag=0
+for x in range(len(arr)):
+    if target-arr[x] in arr:
+        print("True")
+        flag=1
+        break
+if flag==0:
+    print("False")
+        
