@@ -1,0 +1,74 @@
+class node:
+    def __init__(self,data):
+        self.data=data
+        self.left=None
+        self.right=None
+
+def findpair(root,k):
+    
+    stack1=[]
+    stack2=[]
+    flag1=flag2=True
+    finalflag=0
+    curr1=curr2=root
+    while(True):
+        
+        while(flag1):
+            if curr1:
+                stack1.append(curr1)
+                curr1=curr1.left
+            elif not(stack1):
+                flag1=0
+            else:
+                curr1=stack1.pop()
+                #print(curr1.data)
+                val1=curr1.data
+                curr1=curr1.right
+                flag1=0
+                
+        while(flag2):
+            if curr2:
+                stack2.append(curr2)
+                curr2=curr2.right
+            elif not(stack2):
+                flag2=0
+            else:
+                curr2=stack2.pop()
+                val2=curr2.data
+                #print(curr2.data)
+                curr2=curr2.left
+                flag2=0
+        
+        if val1+val2==k:
+            finalflag=1
+            break
+        
+        elif val1+val2 > k:
+            flag1=False
+            flag2=True
+            
+        elif val1+val2 < k:
+            flag2=False
+            flag1=True
+        if val1>=val2:
+            break
+    
+    if finalflag==0:
+        print(0)
+    else:
+        print(1)
+
+root=node(15)
+root.left=node(10)
+root.right=node(20)
+root.left.left=node(8)
+root.left.right=node(12)
+root.right.left=node(16)
+root.right.right=node(25)
+k=33
+findpair(root,k)
+            
+            
+    
+    
+        
